@@ -23,7 +23,7 @@ function App() {
       setErrorMessage('Please enter a name for the task!');
     }
     else if (task.length <= 19) {
-      setToDoList((t) => [task, ...t,]);
+      setToDoList((t) => [...t, task,]);
       setTask('');
     }
     else {
