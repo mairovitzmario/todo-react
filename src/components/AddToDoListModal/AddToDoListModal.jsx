@@ -4,7 +4,7 @@ import ToDoListCard from '../ToDoListCard/ToDoListCard'
 import { ToDoContext } from '../../App';
 
 import { Modal, Button, ColorInput, Input, Space, Flex } from '@mantine/core';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
 
@@ -13,9 +13,15 @@ function AddToDoListModal() {
     const [name, setName] = useState('New List')
     const [color, setColor] = useState('#000000')
 
+
     const [opened, { open, close }] = useDisclosure(false);
 
     const { toDoLists, setToDoLists } = useContext(ToDoContext)
+
+    useEffect(() => {
+        setName('New List')
+        setColor('#000000')
+    }, [opened])
 
     function changeName(event) {
         let text = event.target.value;
@@ -28,8 +34,6 @@ function AddToDoListModal() {
 
     function addList() {
         setToDoLists((t) => ([...t, { name: name, color: color, list: [] }]))
-        setName('New List')
-        setColor('#000000')
         close();
     }
 
