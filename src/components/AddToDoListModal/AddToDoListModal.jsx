@@ -42,7 +42,7 @@ function AddToDoListModal() {
                     <div className="card-wrapper">
                         <ToDoListCard name={name} color={color} />
                     </div>
-
+                    <Space h="md" />
                     <div className="input-wrapper">
                         <Input.Wrapper size="lg" label="Pick a name:" description="" error="">
                             <Input size="lg" variant="filled" placeholder="New List" onChange={changeName} />

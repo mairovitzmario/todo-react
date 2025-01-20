@@ -5,12 +5,13 @@ import ToDoWrapper from '../../components/ToDoWrapper/ToDoWrapper';
 import ToDoListTitle from '../../components/ToDoListTitle/ToDoListTitle';
 import { ToDoContext } from '../../App';
 
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, createContext } from 'react'
 import { useParams } from "react-router";
 import { CloseButton } from '@mantine/core';
 import { Link } from 'react-router';
 
 
+export const SingleListContext = createContext()
 
 function ToDoListPage() {
   let params = useParams();
@@ -20,31 +21,34 @@ function ToDoListPage() {
 
   const [toDoList, setToDoList] = useState(toDoLists[params.id]);
 
-  const [task, setTask] = useState('');
+  const [taskText, setTaskText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+
 
   useEffect(() => {
     let newToDoLists = toDoLists;
     newToDoLists[params.id] = toDoList;
     setToDoLists(newToDoLists);
-    console.log(toDoLists)
+
+
   }, [toDoList]);
 
 
 
   function onInputChange(e) {
-    setTask(e.target.value);
+    setTaskText(e.target.value);
   }
 
   function addToDoTask() {
 
     setErrorMessage('');
-    if (task.length === 0) {
+    if (taskText.length === 0) {
       setErrorMessage('Please enter a name for the task!');
     }
-    else if (task.length <= 19) {
-      setToDoList((t) => ({ ...t, list: [...t.list, task], }));
-      setTask('');
+    else if (taskText.length <= 19) {
+      setToDoList((t) => ({ ...t, list: [...t.list, { text: taskText, isCompleted: false }], }));
+      setTaskText('');
 
 
     }
@@ -55,7 +59,7 @@ function ToDoListPage() {
   }
 
   return (
-    <>
+    <SingleListContext.Provider value={{ toDoList, setToDoList }}>
 
       <div className='wrapper'>
 
@@ -67,19 +71,22 @@ function ToDoListPage() {
 
         <div className='form-wrapper'>
           <form onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="Add a new task" value={task} onChange={onInputChange} />
+            <input type="text" placeholder="Add a new task" value={taskText} onChange={onInputChange} />
             <button type="submit" onClick={addToDoTask}>Add</button>
           </form>
           < p className='error-message'>{errorMessage}</p>
         </div>
 
         {toDoList.list.map((task, index) => (
-          <ToDoCard key={index} index={index} text={task} />
+
+
+          <ToDoCard key={index} index={index} text={task.text} _isCompleted={task.isCompleted} />
+
         )
         )}
 
       </div>
-    </>
+    </SingleListContext.Provider>
   )
 }
 

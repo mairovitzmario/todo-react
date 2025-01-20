@@ -13,7 +13,7 @@ function ToDoListCard({ name, color, id = -1 }) {
 
     let list = id === -1 ? [] : toDoLists[id].list;
 
-    const completedTasks = list.filter((task) => task.isChecked).length;
+    const completedTasks = list.filter((task) => task.isCompleted).length;
     const totalTasks = list.length;
 
     const cardContent = (

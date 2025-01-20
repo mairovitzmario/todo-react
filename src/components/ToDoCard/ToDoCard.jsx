@@ -1,22 +1,35 @@
 import './ToDoCard.css';
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useState, useContext } from 'react';
 
+import { SingleListContext } from '../../pages/ToDoListPage/ToDoListPage'
 
 function ToDoCard({ index, text, _isCompleted }) {
     const [firstTime, setFirstTime] = useState(true);
     const [isCompleted, setIsCompleted] = useState(_isCompleted);
+    const { toDoList, setToDoList } = useContext(SingleListContext)
+
+
+    useEffect(() => {
+        console.log(isCompleted);
+        let newList = toDoList.list;
+        newList[index].isCompleted = isCompleted;
+        setToDoList(t => ({ ...t, list: newList }))
+    }, [isCompleted,])
 
     function toggleCompleted() {
         setFirstTime(false);
         setIsCompleted(prevIsCompleted => !prevIsCompleted);
+
+
     }
+
 
 
     return (
         <div id={"todocard" + index.toString()} className='todo-card' onClick={toggleCompleted}>
 
-            <h2 className={`todo-title ${firstTime ? '' : (isCompleted ? 'crossed' : 'uncrossed')}`}>
+            <h2 className={`todo-title ${isCompleted ? 'crossed' : (firstTime ? '' : 'uncrossed')}`}>
                 {text}
             </h2>
 
