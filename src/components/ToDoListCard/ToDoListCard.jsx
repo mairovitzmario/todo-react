@@ -1,7 +1,7 @@
 import './ToDoListCard.css';
 import { getBrightness } from '../../utils.js';
 
-function ToDoCard({ name, color, list = [] }) {
+function ToDoCard({ name, color, list = [], clickable = false }) {
     const textColor = getBrightness(color) > 186 ? 'black' : 'white';
 
     return (
@@ -10,6 +10,7 @@ function ToDoCard({ name, color, list = [] }) {
             style={{
                 backgroundColor: color,
                 color: textColor,
+                cursor: clickable ? 'pointer' : 'default'
             }}
             aria-label={`${name} card`}
         >

@@ -12,7 +12,6 @@ import { MantineProvider, Button, Space, Flex, } from '@mantine/core';
 
 export const ToDoContext = createContext();
 function MainPage() {
-    const [opened, { open, close }] = useDisclosure(false);
     const [toDoLists, setToDoLists] = useState([]);
 
 
@@ -24,11 +23,9 @@ function MainPage() {
                 <div className='wrapper'>
                     <ToDoListTitle />
 
-                    <AddToDoListModal opened={opened} close={close} />
+                    <AddToDoListModal />
 
-                    <Button variant="default" size='xl' onClick={open}>
-                        Add a new list
-                    </Button>
+
 
                     <Space h='xl' />
 
@@ -38,7 +35,7 @@ function MainPage() {
                         wrap="wrap"
                         gap="xl">
                         {toDoLists.map((l, index) => (
-                            <ToDoListCard key={index} name={l.name} color={l.color} list={l.list} />
+                            <ToDoListCard key={index} name={l.name} color={l.color} list={l.list} clickable={true} />
                         ))}
                     </Flex>
 
