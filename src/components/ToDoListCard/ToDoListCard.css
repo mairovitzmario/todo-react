@@ -1,0 +1,38 @@
+.to-do-card {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.to-do-card:hover {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+
+    margin: 0;
+}
+
+.card-tasks {
+    position: absolute;
+    bottom: -20px;
+    right: 10px;
+    font-size: 1.5rem;
+}
+
+.card-title,
+.card-tasks {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: wrap;
+}
