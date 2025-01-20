@@ -1,7 +1,7 @@
 import './AddToDoListModal.css'
 
 import ToDoListCard from '../ToDoListCard/ToDoListCard'
-import { ToDoContext } from '../../pages/MainPage/MainPage';
+import { ToDoContext } from '../../App';
 
 import { Modal, Button, ColorInput, Input, Space, Flex } from '@mantine/core';
 import { useState, useContext } from 'react';
@@ -28,7 +28,7 @@ function AddToDoListModal() {
 
     function addList() {
         setToDoLists((t) => ([...t, { name: name, color: color, list: [] }]))
-        setName('')
+        setName('New List')
         setColor('#000000')
         close();
     }

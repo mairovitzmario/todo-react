@@ -5,11 +5,14 @@
     align-items: center;
     width: 300px;
     height: 50px;
-    background-color: rgb(201, 176, 37);
+    background-color: rgb(255, 255, 255);
     padding: 0 20px;
     margin: 10px;
     border-radius: 5px;
+    border: solid hsla(0, 0%, 0%, 0.2) 1px;
+    cursor: pointer;
 }
+
 
 
 .todo-title {
@@ -17,7 +20,7 @@
     font-size: 24px;
     font-family: 'Arial', sans-serif;
     font-weight: 500;
-    color: rgb(255, 255, 255);
+    color: hsl(0, 0%, 0%);
 }
 
 .crossed:after {
@@ -27,11 +30,12 @@
     left: 0;
     height: 3px;
 
-    background: #068d4e;
+    background: #10c771;
     animation: strike 0.3s linear forwards;
     z-index: 2;
 }
 
+/*#068d4e*/
 .uncrossed:after {
     content: '';
     position: absolute;
@@ -39,7 +43,7 @@
     left: 0;
     height: 3px;
 
-    background: #068d4e;
+    background: #10c771;
     animation: unstrike 0.3s linear forwards;
     z-index: 2;
 }
@@ -85,7 +89,7 @@
 
 .checkbox-wrapper-37 .checkbox-box {
     fill: #ffffff;
-    stroke: #068d4e;
+    stroke: #10c771;
     stroke-dasharray: 800;
     stroke-dashoffset: 800;
     transition: stroke-dashoffset 0.3s ease-in;
@@ -93,7 +97,7 @@
 }
 
 .checkbox-wrapper-37 .checkbox-tick {
-    stroke: #068d4e;
+    stroke: #10c771;
     stroke-dasharray: 172;
     stroke-dashoffset: 172;
     transition: stroke-dashoffset 0.3s ease-in;

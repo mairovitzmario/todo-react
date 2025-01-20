@@ -3,19 +3,18 @@ import React from 'react';
 import { useState } from 'react';
 
 
-function ToDoCard({ index, text, }) {
+function ToDoCard({ index, text, _isCompleted }) {
     const [firstTime, setFirstTime] = useState(true);
-    const [isCompleted, setIsCompleted] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(_isCompleted);
 
     function toggleCompleted() {
         setFirstTime(false);
-        console.log(text, isCompleted)
         setIsCompleted(prevIsCompleted => !prevIsCompleted);
     }
 
 
     return (
-        <div className="todo-card">
+        <div id={"todocard" + index.toString()} className='todo-card' onClick={toggleCompleted}>
 
             <h2 className={`todo-title ${firstTime ? '' : (isCompleted ? 'crossed' : 'uncrossed')}`}>
                 {text}
@@ -23,7 +22,7 @@ function ToDoCard({ index, text, }) {
 
 
             <div className="checkbox-wrapper-37">
-                <input type="checkbox" name="checkbox" id={"checkbox" + index.toString()} onChange={toggleCompleted} checked={isCompleted} />
+                <input type="checkbox" name="checkbox" id={"checkbox" + index.toString()} checked={isCompleted} disabled />
                 <label htmlFor={"checkbox" + index.toString()} className="terms-label">
                     <svg
                         className="checkbox-svg"

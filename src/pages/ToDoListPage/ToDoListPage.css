@@ -33,7 +33,7 @@ input {
 }
 
 input:focus {
-    border-color: rgb(201, 176, 37);
+    border-color: hsl(152, 92%, 29%);
     box-shadow: 0 0 5px rgba(94, 159, 255, 0.5);
 }
 
@@ -64,4 +64,10 @@ button:active {
     font-weight: 600;
     margin-top: 5px;
     margin-left: 2px;
+}
+
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

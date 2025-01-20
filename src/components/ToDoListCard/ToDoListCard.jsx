@@ -1,23 +1,45 @@
 import './ToDoListCard.css';
+
+import { Link } from 'react-router';
+
 import { getBrightness } from '../../utils.js';
+import { ToDoContext } from '../../App.jsx';
+import { useContext } from 'react';
 
-function ToDoCard({ name, color, list = [], clickable = false }) {
+
+function ToDoListCard({ name, color, id = -1 }) {
     const textColor = getBrightness(color) > 186 ? 'black' : 'white';
+    const { toDoLists, setToDoLists } = useContext(ToDoContext)
 
-    return (
+    let list = id === -1 ? [] : toDoLists[id].list;
+
+    const completedTasks = list.filter((task) => task.isChecked).length;
+    const totalTasks = list.length;
+
+    const cardContent = (
         <div
             className="to-do-card"
             style={{
                 backgroundColor: color,
                 color: textColor,
-                cursor: clickable ? 'pointer' : 'default'
+                cursor: id !== -1 ? "pointer" : "default",
             }}
             aria-label={`${name} card`}
         >
             <h2 className="card-title">{name}</h2>
-            <h3 className='card-tasks'>{list.filter((task) => task.isChecked).length}/{list.length}</h3>
+            <h3 className="card-tasks">
+                {completedTasks}/{totalTasks}
+            </h3>
         </div>
+    );
+
+    return id !== -1 ? (
+        <Link to={`/list/${id}`} style={{ textDecoration: "none" }}>
+            {cardContent}
+        </Link>
+    ) : (
+        cardContent
     );
 }
 
-export default ToDoCard;
+export default ToDoListCard;
